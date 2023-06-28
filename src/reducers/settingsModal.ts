@@ -1,5 +1,5 @@
 const initialState = {
-	isOpen: true
+	isOpen: false
 };
 
 const settingsModal = (state = initialState, action: any) => {

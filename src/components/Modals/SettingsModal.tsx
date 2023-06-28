@@ -2,11 +2,11 @@ import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
 import { Switch } from '@headlessui/react';
 import { connect } from 'react-redux';
-
-const settingDescriptions = {
-};
+import { useTranslation } from 'react-i18next';
 
 const SettingsModal = ({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: (value: boolean) => void }) => {
+	const { t } = useTranslation();
+
 	const [settings, setSettings] = useState({
 		checkForNewConfirmations: false,
 		secondsBetweenChecks: 5,
@@ -42,7 +42,7 @@ const SettingsModal = ({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: (val
 						>
 							<Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white px-4 py-4 text-left align-middle shadow-xl transition-all">
 								<Dialog.Title as="h3" className="text-md font-medium leading-6 text-gray-900">
-									Settings
+									{t('Settings')}
 								</Dialog.Title>
 								<div className="mt-2 flex flex-col gap-2">
 									<div className="flex flex-row items-center gap-2">
@@ -55,7 +55,9 @@ const SettingsModal = ({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: (val
 												inline-block h-[16px] w-[16px] transform rounded-full bg-white shadow-lg ring-0 transition duration-200
 												ease-in-out`} />
 										</Switch>
-										<p className="text-12 leading-tight">Periodically check for new confirmations and show a popup when they arrive</p>
+										<p className="text-12 leading-tight">
+											{t('checkForNewConfirmationsDesc')}
+										</p>
 									</div>
 
 									<div className="flex flex-row items-center gap-2">
@@ -64,7 +66,9 @@ const SettingsModal = ({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: (val
 												${!checkForNewConfirmations ? 'bg-gray-50 cursor-not-allowed text-gray-300' : 'bg-white text-gray-900'}`}
 											disabled={!checkForNewConfirmations}
 										/>
-										<p className={`text-12 leading-tight duration-100 ${!checkForNewConfirmations ? 'text-gray-300' : ''}`}>Seconds between checking for confirmations</p>
+										<p className={`text-12 leading-tight duration-100 ${!checkForNewConfirmations ? 'text-gray-300' : ''}`}>
+											{t('secondsBetweenChecksDesc')}
+										</p>
 									</div>
 
 									<div className="flex flex-row items-center gap-2">
@@ -79,7 +83,9 @@ const SettingsModal = ({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: (val
 												inline-block h-[16px] w-[16px] transform rounded-full bg-white shadow-lg ring-0 transition duration-200
 												ease-in-out`} />
 										</Switch>
-										<p className={`text-12 leading-tight duration-100 ${!checkForNewConfirmations ? 'text-gray-300' : ''}`}>Check all accounts for confirmations</p>
+										<p className={`text-12 leading-tight duration-100 ${!checkForNewConfirmations ? 'text-gray-300' : ''}`}>
+											{t('checkAllAccountsDesc')}
+										</p>
 									</div>
 
 									<div className="flex flex-row items-center gap-2">
@@ -94,7 +100,9 @@ const SettingsModal = ({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: (val
 												inline-block h-[16px] w-[16px] transform rounded-full bg-white shadow-lg ring-0 transition duration-200
 												ease-in-out`} />
 										</Switch>
-										<p className={`text-12 leading-tight duration-100 ${!checkForNewConfirmations ? 'text-gray-300' : ''}`}>Periodically check for new confirmations and show a popup when they arrive</p>
+										<p className={`text-12 leading-tight duration-100 ${!checkForNewConfirmations ? 'text-gray-300' : ''}`}>
+											{t('autoConfirmMarketDesc')}
+										</p>
 									</div>
 
 									<div className="flex flex-row items-center gap-2">
@@ -109,7 +117,9 @@ const SettingsModal = ({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: (val
 												inline-block h-[16px] w-[16px] transform rounded-full bg-white shadow-lg ring-0 transition duration-200
 												ease-in-out`} />
 										</Switch>
-										<p className={`text-12 leading-tight duration-100 ${!checkForNewConfirmations ? 'text-gray-300' : ''}`}>Periodically check for new confirmations and show a popup when they arrive</p>
+										<p className={`text-12 leading-tight duration-100 ${!checkForNewConfirmations ? 'text-gray-300' : ''}`}>
+											{t('autoConfirmTradesDesc')}
+										</p>
 									</div>									
 								</div>
 
@@ -126,7 +136,9 @@ const SettingsModal = ({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: (val
 												inline-block h-[16px] w-[16px] transform rounded-full bg-white shadow-lg ring-0 transition duration-200
 												ease-in-out`} />
 										</Switch>
-										<p className="text-12 leading-tight">Minimal UI Mode (Feels more like original SDA)</p>
+										<p className="text-12 leading-tight">
+											{t('minimalModeDesc')}
+										</p>
 									</div>
 								</div>
 
@@ -134,7 +146,7 @@ const SettingsModal = ({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: (val
 									<button type="button" className="w-full inline-flex justify-center rounded-md border border-transparent bg-violet-500 px-4 py-2 text-14 font-medium text-white hover:bg-violet-400 duration-100 focus:outline-none focus-visible:ring-1 focus-visible:ring-violet-500 focus-visible:ring-offset-1"
 										onClick={saveSettings}
 									>
-										Save Settings
+										{t('Save Settings')}
 									</button>
 
 								</div>

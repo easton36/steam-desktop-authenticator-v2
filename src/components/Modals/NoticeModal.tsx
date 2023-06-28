@@ -1,8 +1,11 @@
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment } from 'react';
 import { connect } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 const NoticeModal = ({ title, message, isOpen, setIsOpen }: { title: string, message: string, isOpen: boolean, setIsOpen: (value: boolean) => void }) => {
+	const { t } = useTranslation();
+	
 	return (
 		<Transition appear show={isOpen} as={Fragment}>
 			<Dialog as="div" className="relative z-10" onClose={() => setIsOpen(false)}>
@@ -31,7 +34,7 @@ const NoticeModal = ({ title, message, isOpen, setIsOpen }: { title: string, mes
 									<button type="button"
 										className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
 										onClick={() => setIsOpen(false)}>
-										OK
+										{t('OK')}
 									</button>
 								</div>
 							</Dialog.Panel>

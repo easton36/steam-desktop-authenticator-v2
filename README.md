@@ -22,3 +22,27 @@
 IF you lost your `maFiles` OR lost your encryption key, go [here](https://store.steampowered.com/twofactor/manage) and click "Remove Authenticator" then enter your revocation code that you wrote down when you first added your account to SDA.
 
 If you did not follow the directions and did not write your revocation code down, you're well and truly screwed. The only option is beg to [Steam Support](https://support.steampowered.com/) and say you lost your mobile authenticator and the revocation code.
+
+## Features
+ - Manage many Steam accounts at once
+ - View and confirm all pending Steam trades and market listings
+ - Add and remove Steam Guard Mobile Authenticator
+ - Generate Steam Guard 2FA codes
+ - AES 256-bit encryption of Steam Account `maFiles` directory
+ - Multiple language support
+ - Auto-updater
+ - Cross-platform (Windows, MacOS, Linux)
+ - Light and dark themes
+ - Custom accent colors
+ - Tray icon with context menu
+ - Auto-start on system login
+
+## Contributing
+If you want to contribute to the project, please read the [Contributing](https://github.com/easton36/steam-desktop-authenticator-v2/blob/master/CONTRIBUTING.md) document first.
+
+## License
+This project is licensed under the [MIT License](https://github.com/easton36/steam-desktop-authenticator-v2/blob/master/LICENSE).
+
+## Credits
+ - [Jessecar96](https://github.com/Jessecar96) for creating the original [SteamDesktopAuthenticator](https://github.com/Jessecar96/SteamDesktopAuthenticator)
+ - [DoctorMckay](https://github.com/DoctorMcKay) for creating all of the Steam libraries used in this project
