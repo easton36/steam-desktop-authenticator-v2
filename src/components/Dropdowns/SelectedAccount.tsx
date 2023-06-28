@@ -1,17 +1,20 @@
 import { Menu, Transition } from '@headlessui/react';
 import { Fragment, useEffect, useRef, useState } from 'react';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
+import { useTranslation } from 'react-i18next';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faRightToBracket, faArrowsRotate, faUserMinus, faUserSlash } from '@fortawesome/free-solid-svg-icons';
 
 const SelectedAccount = () => {
+	const { t } = useTranslation();
+
 	return (
 		<Menu as="div" className="relative inline-block text-left">
 			<div>
 				<Menu.Button
 					className="inline-flex w-full justify-center items-center rounded-md bg-black bg-opacity-20 px-3 py-1.5 text-xs font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
-					Selected Account
+					{t('Selected Account')}
 					<ChevronDownIcon className="ml-2 -mr-1 h-5 w-5 text-white"
 						aria-hidden="true" />
 				</Menu.Button>
@@ -26,7 +29,7 @@ const SelectedAccount = () => {
 							{({ active }) => (
 								<button className={`${ active ? 'bg-violet-500 text-white' : 'text-gray-900' } group flex w-full items-center rounded-md px-2 py-2 text-sm gap-2`}>
 									<FontAwesomeIcon icon={faRightToBracket}/>
-									Login again
+									{t('Login again')}
 								</button>
 							)}
 						</Menu.Item>
@@ -34,7 +37,7 @@ const SelectedAccount = () => {
 							{({ active }) => (
 								<button className={`${ active ? 'bg-violet-500 text-white' : 'text-gray-900' } group flex w-full items-center rounded-md px-2 py-2 text-sm gap-2`}>
 									<FontAwesomeIcon icon={faArrowsRotate}/>
-									Force session refresh
+									{t('Force session refresh')}
 								</button>
 							)}
 						</Menu.Item>
@@ -44,7 +47,7 @@ const SelectedAccount = () => {
 							{({ active }) => (
 								<button className={`${ active ? 'bg-violet-500 text-white' : 'text-gray-900' } group flex w-full items-center rounded-md px-2 py-2 text-sm gap-2`}>
 									<FontAwesomeIcon icon={faUserMinus}/>
-									Remove from manifest
+									{t('Remove from manifest')}
 								</button>
 							)}
 						</Menu.Item>
@@ -52,7 +55,7 @@ const SelectedAccount = () => {
 							{({ active }) => (
 								<button className={`${ active ? 'bg-violet-500 text-white' : 'text-gray-900' } group flex w-full items-center rounded-md px-2 py-2 text-sm gap-2`}>
 									<FontAwesomeIcon icon={faUserSlash}/>
-									Deactivate authenticator
+									{t('Deactivate authenticator')}
 								</button>
 							)}
 						</Menu.Item>

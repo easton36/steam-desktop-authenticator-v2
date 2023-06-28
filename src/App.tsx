@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { invoke } from "@tauri-apps/api/tauri";
 import { connect } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 import Options from "./components/Dropdowns/Options";
 import SelectedAccount from "./components/Dropdowns/SelectedAccount";
@@ -16,6 +17,8 @@ import AccountsList from "./components/AccountsList";
 import ThemeToggle from "./components/ThemeToggle";
 
 const App = ({ setupNewAccount }: { setupNewAccount: () => void}) => {
+	const { t } = useTranslation();
+
 	const [greetMsg, setGreetMsg] = useState("");
 	const [name, setName] = useState("");
 
@@ -34,10 +37,10 @@ const App = ({ setupNewAccount }: { setupNewAccount: () => void}) => {
 				<button type="button" className="flex-1 rounded-md bg-black bg-opacity-20 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75" onClick={() => {
 					setupNewAccount();
 				}}>
-					Setup New Account
+					{t('Setup New Account')}
 				</button>
 				<button type="button" className="flex-1 rounded-md bg-black bg-opacity-20 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
-					Setup Encryption
+					{t('Setup Encryption')}
 				</button>
 			</div>
 
@@ -47,7 +50,7 @@ const App = ({ setupNewAccount }: { setupNewAccount: () => void}) => {
 
 			<div className="flex flex-row items-center w-full justify-between m-0">
 				<a href="https://github.com/easton36/steam-desktop-authenticator-v2/releases/latest" target="_blank" className="text-violet-500 text-xs underline">
-					Download latest version
+					{t('Download latest version')}
 				</a>
 
 				<p className="text-gray-400 text-xs">v0.0.0</p>

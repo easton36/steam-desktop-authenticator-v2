@@ -4,7 +4,7 @@ import { Switch } from '@headlessui/react';
 import { connect } from 'react-redux';
 
 const settingDescriptions = {
-	
+};
 
 const SettingsModal = ({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: (value: boolean) => void }) => {
 	const [settings, setSettings] = useState({

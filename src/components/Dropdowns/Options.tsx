@@ -3,11 +3,14 @@ import { Fragment } from 'react';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
 import { exit } from '@tauri-apps/api/process';
 import { connect } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFileImport, faGear, faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 
 const Options = ({ setIsOpen, triggerImportAccountModal }: { setIsOpen: (value: boolean) => void, triggerImportAccountModal: () => void }) => {
+	const { t } = useTranslation();
+
 	const quit = async () => {
 		await exit(1);
 	};
@@ -17,7 +20,7 @@ const Options = ({ setIsOpen, triggerImportAccountModal }: { setIsOpen: (value: 
 			<div>
 				<Menu.Button
 					className="inline-flex w-full justify-center items-center rounded-md bg-black bg-opacity-20 px-3 py-1.5 text-xs font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
-					Options
+					{t('Options')}
 					<ChevronDownIcon className="ml-2 -mr-1 h-5 w-5 text-white"
 						aria-hidden="true" />
 				</Menu.Button>
@@ -35,7 +38,7 @@ const Options = ({ setIsOpen, triggerImportAccountModal }: { setIsOpen: (value: 
 										triggerImportAccountModal();
 									}}>
 										<FontAwesomeIcon icon={faFileImport}/>
-										Import Account
+										{t('Import Account')}
 									</button>
 							)}
 						</Menu.Item>
@@ -47,7 +50,7 @@ const Options = ({ setIsOpen, triggerImportAccountModal }: { setIsOpen: (value: 
 									setIsOpen(true);
 								}}>
 									<FontAwesomeIcon icon={faGear} />
-									Settings
+									{t('Settings')}
 								</button>
 							)}
 						</Menu.Item>
@@ -55,7 +58,7 @@ const Options = ({ setIsOpen, triggerImportAccountModal }: { setIsOpen: (value: 
 							{({ active }) => (
 								<button className={`${ active ? 'bg-violet-500 text-white' : 'text-gray-900' } group flex w-full items-center rounded-md px-2 py-2 text-sm gap-2`} onClick={quit}>
 									<FontAwesomeIcon icon={faCircleXmark} />
-									Quit
+									{t('Quit')}
 								</button>
 							)}
 						</Menu.Item>
