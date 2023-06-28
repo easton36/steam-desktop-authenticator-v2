@@ -6,7 +6,7 @@
 
 <p align="center">
   A desktop implementation of Steam's mobile authenticator app.<br/>
-  Completely rebuilt version of the original <a href="https://github.com/Jessecar96/SteamDesktopAuthenticator" about="_blank">SteamDesktopAuthenticator<a/> by <a href="https://github.com/Jessecar96" about="_blank">Jessecar96</a>, using Tauri and React.
+  Completely rebuilt version of the original <a href="https://github.com/Jessecar96/SteamDesktopAuthenticator" target="_blank">SteamDesktopAuthenticator<a/> by <a href="https://github.com/Jessecar96" target="_blank">Jessecar96</a>, using Tauri and React.
 </p>
 
 <h3 align="center" style="margin-bottom:0">
