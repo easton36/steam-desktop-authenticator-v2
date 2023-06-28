@@ -1,5 +1,5 @@
 import { Menu, Transition } from '@headlessui/react';
-import { Fragment, useEffect, useRef, useState } from 'react';
+import { Fragment } from 'react';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
 import { exit } from '@tauri-apps/api/process';
 import { connect } from 'react-redux';
@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFileImport, faGear, faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 
-const Options = ({ setIsOpen }: { setIsOpen: (value: boolean) => void }) => {
+const Options = ({ setIsOpen, triggerImportAccountModal }: { setIsOpen: (value: boolean) => void, triggerImportAccountModal: () => void }) => {
 	const quit = async () => {
 		await exit(1);
 	};
@@ -30,10 +30,13 @@ const Options = ({ setIsOpen }: { setIsOpen: (value: boolean) => void }) => {
 					<div className="px-1 py-1 ">
 						<Menu.Item>
 							{({ active }) => (
-								<button className={`${ active ? 'bg-violet-500 text-white' : 'text-gray-900' } group flex w-full items-center rounded-md px-2 py-2 text-sm gap-2`}>
-									<FontAwesomeIcon icon={faFileImport}/>
-									Import Account
-								</button>
+									
+									<button className={`${ active ? 'bg-violet-500 text-white' : 'text-gray-900' } group flex w-full items-center rounded-md px-2 py-2 text-sm gap-2`} onClick={() => {
+										triggerImportAccountModal();
+									}}>
+										<FontAwesomeIcon icon={faFileImport}/>
+										Import Account
+									</button>
 							)}
 						</Menu.Item>
 					</div>
@@ -64,7 +67,8 @@ const Options = ({ setIsOpen }: { setIsOpen: (value: boolean) => void }) => {
 };
 
 const mapDispatchToProps = (dispatch: any) => ({
-	setIsOpen: (isOpen: Boolean) => dispatch({ type: 'SET_SETTINGS_MODAL', isOpen: isOpen })
+	setIsOpen: (isOpen: Boolean) => dispatch({ type: 'SET_SETTINGS_MODAL', isOpen: isOpen }),
+	triggerImportAccountModal: () => dispatch({ type: 'SET_IMPORT_ACCOUNT_MODAL', isOpen: true })
 });
 
 export default connect(null, mapDispatchToProps)(Options);

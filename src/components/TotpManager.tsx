@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import React, { useState, useEffect } from 'react';
-import { tippy } from '@tippyjs/react';
+import Tippy, { tippy } from '@tippyjs/react';
 
 const TotpManager = () => {
 	const totpCode = 'DQV3N'; // Replace with your actual TOTP code
@@ -38,7 +38,7 @@ const TotpManager = () => {
 			trigger: 'click',
 			content: 'Copied!',
 			duration: 500,
-			theme: 'SDA'
+			theme: 'success'
 		});
 	}, []);
 
@@ -60,9 +60,13 @@ const TotpManager = () => {
 					</button>
 				</div>
 
-				<div className="relative h-4 bg-gray-100 mt-2 rounded-md">
-					<div className={`absolute top-0 left-0 h-full bg-green-500 rounded-l-md ${secondsRemaining === initialSeconds || secondsRemaining === 0 ? 'rounded-r-md' : ''}`} style={progressStyle} />
-				</div>
+				<Tippy theme="SDA" content={
+					<p>{secondsRemaining} seconds remaining</p>
+				}>
+					<div id="progressBar" className="relative h-4 bg-gray-100 mt-2 rounded-md">
+						<div className={`absolute top-0 left-0 h-full bg-green-500 rounded-l-md ${secondsRemaining === initialSeconds || secondsRemaining === 0 ? 'rounded-r-md' : ''}`} style={progressStyle} />
+					</div>
+				</Tippy>
 			</div>
 			
 		</div>

@@ -1,11 +1,24 @@
-const settingsModal = (state = false, action: any) => {
+const initialState = {
+	isOpen: true
+};
+
+const settingsModal = (state = initialState, action: any) => {
 	switch (action.type) {
 		case 'SET_SETTINGS_MODAL':
-			return action.isOpen;
+			return {
+				...state,
+				isOpen: action.isOpen,
+			};
 		case 'HIDE_SETTINGS_MODAL':
-			return false;
+			return {
+				...state,
+				isOpen: false,
+			};
 		case 'SHOW_SETTINGS_MODAL':
-			return true;
+			return {
+				...state,
+				isOpen: true
+			};
 		default:
 			return state;
 	}
