@@ -3,12 +3,24 @@ import { Fragment, useState } from 'react';
 import { Switch } from '@headlessui/react';
 import { connect } from 'react-redux';
 
+const settingDescriptions = {
+	
+
 const SettingsModal = ({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: (value: boolean) => void }) => {
+	const [settings, setSettings] = useState({
+		checkForNewConfirmations: false,
+		secondsBetweenChecks: 5,
+		checkAllAccounts: false,
+		autoConfirmMarket: false,
+		autoConfirmTrades: false
+	} as any);
+
 	const [checkForNewConfirmations, setCheckForNewConfirmations] = useState(false);
 	const [secondsBetweenChecks, setSecondsBetweenChecks] = useState(5);
 	const [checkAllAccounts, setCheckAllAccounts] = useState(false);
 	const [autoConfirmMarket, setAutoConfirmMarket] = useState(false);
 	const [autoConfirmTrades, setAutoConfirmTrades] = useState(false);
+	const [minimalMode, setMinimalMode] = useState(false);
 
 	const saveSettings = () => {
 		setIsOpen(false);
@@ -99,6 +111,23 @@ const SettingsModal = ({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: (val
 										</Switch>
 										<p className={`text-12 leading-tight duration-100 ${!checkForNewConfirmations ? 'text-gray-300' : ''}`}>Periodically check for new confirmations and show a popup when they arrive</p>
 									</div>									
+								</div>
+
+								<hr className="m-2"/>
+
+								<div className="mt-2 flex flex-col gap-2">
+									<div className="flex flex-row items-center gap-2">
+										<Switch checked={minimalMode} onChange={setMinimalMode} className={`${minimalMode ? 'bg-violet-700' : 'bg-violet-300' } relative
+											inline-flex h-[20px] w-[35px] shrink-0 cursor-pointer rounded-full border-2 border-transparent
+											transition-colors duration-200 ease-in-out
+											focus-visible:ring-opacity-75`}
+										>
+											<span aria-hidden="true" className={`${minimalMode ? 'translate-x-4' : 'translate-x-0' } pointer-events-none
+												inline-block h-[16px] w-[16px] transform rounded-full bg-white shadow-lg ring-0 transition duration-200
+												ease-in-out`} />
+										</Switch>
+										<p className="text-12 leading-tight">Minimal UI Mode (Feels more like original SDA)</p>
+									</div>
 								</div>
 
 								<div className="mt-4 flex flex-row items-center w-full">

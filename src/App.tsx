@@ -2,13 +2,13 @@ import { useState } from "react";
 import { invoke } from "@tauri-apps/api/tauri";
 import { connect } from "react-redux";
 
-import Options from "./components/Options";
-import SelectedAccount from "./components/SelectedAccount";
+import Options from "./components/Dropdowns/Options";
+import SelectedAccount from "./components/Dropdowns/SelectedAccount";
 
-import SettingsModal from "./components/SettingsModal";
-import NoticeModal from "./components/NoticeModal";
-import ImportAccountModal from "./components/ImportAccountModal";
-import SetupSteamAccountModal from "./components/SetupSteamAccountModal";
+import SettingsModal from "./components/Modals/SettingsModal";
+import NoticeModal from "./components/Modals/NoticeModal";
+import ImportAccountModal from "./components/Modals/ImportAccountModal";
+import SetupSteamAccountModal from "./components/Modals/SetupSteamAccountModal";
 
 import TotpManager from "./components/TotpManager";
 import ConfirmationsManager from "./components/ConfirmationsManager";
