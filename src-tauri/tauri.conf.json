@@ -1,0 +1,62 @@
+{
+	"build": {
+		"beforeDevCommand": "npm run dev",
+		"beforeBuildCommand": "npm run build",
+		"devPath": "http://localhost:1420",
+		"distDir": "../dist",
+		"withGlobalTauri": false
+	},
+	"package": {
+		"productName": "steam-desktop-authenticator-v2",
+		"version": "0.0.0"
+	},
+	"tauri": {
+		"allowlist": {
+			"all": false,
+			"shell": {
+				"all": false,
+				"open": true
+			},
+			"process": {
+				"all": false,
+				"exit": true,
+				"relaunch": false,
+				"relaunchDangerousAllowSymlinkMacos": false
+			}
+		},
+		"bundle": {
+			"active": true,
+			"targets": "all",
+			"identifier": "com.easton36.steam-desktop-authenticator-v2",
+			"icon": [
+				"icons/32x32.png",
+				"icons/128x128.png",
+				"icons/128x128@2x.png",
+				"icons/icon.icns",
+				"icons/icon.ico"
+			]
+		},
+		"security": {
+			"csp": null
+		},
+		"windows": [{
+			"fullscreen": false,
+			"resizable": true,
+			"title": "Steam Desktop Authenticator v2",
+			"width": 350,
+			"height": 475
+		}],
+		"updater": {
+			"active": true,
+			"dialog": true,
+			"pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDYyODNFRDMxMkNDNzcwODYKUldTR2NNY3NNZTJEWXFLdGliN0FTUXQzSjRNYVFsVlFhN0RpQktHSTR5N1dZSUhIY1VGMWtLRGoK",
+			"endpoints": [
+				"https://api.github.com/repos/easton36/steam-desktop-authenticator-v2/releases/latest"
+			],
+			"windows": {
+				"installMode": "passive",
+				"installerArgs": []
+			}
+		}
+	}
+}
