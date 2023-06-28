@@ -1,12 +1,13 @@
 import { Menu, Transition } from '@headlessui/react';
 import { Fragment, useEffect, useRef, useState } from 'react';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { exit } from '@tauri-apps/api/process';
+import { connect } from 'react-redux';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFileImport, faGear, faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 
-const Dropdown = () => {
+const Options = ({ setIsOpen }) => {
 	const quit = async () => {
 		await exit(1);
 	};
@@ -29,31 +30,30 @@ const Dropdown = () => {
 					<div className="px-1 py-1 ">
 						<Menu.Item>
 							{({ active }) => (
-							<button className={`${ active ? 'bg-violet-500 text-white' : 'text-gray-900' } group flex w-full
-								items-center rounded-md px-2 py-2 text-sm gap-2`}>
-								<FontAwesomeIcon icon={faFileImport}/>
-								Import Account
-							</button>
+								<button className={`${ active ? 'bg-violet-500 text-white' : 'text-gray-900' } group flex w-full items-center rounded-md px-2 py-2 text-sm gap-2`}>
+									<FontAwesomeIcon icon={faFileImport}/>
+									Import Account
+								</button>
 							)}
 						</Menu.Item>
 					</div>
 					<div className="px-1 py-1">
 						<Menu.Item>
 							{({ active }) => (
-							<button className={`${ active ? 'bg-violet-500 text-white' : 'text-gray-900' } group flex w-full
-								items-center rounded-md px-2 py-2 text-sm gap-2`}>
-								<FontAwesomeIcon icon={faGear} />
-								Settings
-							</button>
+								<button className={`${ active ? 'bg-violet-500 text-white' : 'text-gray-900' } group flex w-full items-center rounded-md px-2 py-2 text-sm gap-2`} onClick={() => {
+									setIsOpen(true);
+								}}>
+									<FontAwesomeIcon icon={faGear} />
+									Settings
+								</button>
 							)}
 						</Menu.Item>
 						<Menu.Item>
 							{({ active }) => (
-							<button className={`${ active ? 'bg-violet-500 text-white' : 'text-gray-900' } group flex w-full
-								items-center rounded-md px-2 py-2 text-sm gap-2`} onClick={quit}>
-								<FontAwesomeIcon icon={faCircleXmark} />
-								Quit
-							</button>
+								<button className={`${ active ? 'bg-violet-500 text-white' : 'text-gray-900' } group flex w-full items-center rounded-md px-2 py-2 text-sm gap-2`} onClick={quit}>
+									<FontAwesomeIcon icon={faCircleXmark} />
+									Quit
+								</button>
 							)}
 						</Menu.Item>
 					</div>
@@ -63,4 +63,8 @@ const Dropdown = () => {
 	);
 };
 
-export default Dropdown;
+const mapDispatchToProps = (dispatch: any) => ({
+	setIsOpen: (isOpen: Boolean) => dispatch({ type: 'SET_SETTINGS_MODAL', isOpen: isOpen })
+});
+
+export default connect(null, mapDispatchToProps)(Options);

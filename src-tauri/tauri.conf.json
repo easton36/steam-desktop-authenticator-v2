@@ -54,9 +54,13 @@
 				"https://api.github.com/repos/easton36/steam-desktop-authenticator-v2/releases/latest"
 			],
 			"windows": {
-				"installMode": "passive",
+				"installMode": "basicUi",
 				"installerArgs": []
 			}
+		},
+		"systemTray": {
+			"iconPath": "icons/32x32.png",
+			"iconAsTemplate": true
 		}
 	}
 }

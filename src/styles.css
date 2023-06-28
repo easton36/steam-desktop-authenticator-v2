@@ -2,8 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+body{
+	background-color: rgb(55, 65, 81);
+}
+
 #root{
-	width: 100%;
+	width: 100vw;
 	height: 100vh;
 	display: flex;
 	flex-grow: 1;
