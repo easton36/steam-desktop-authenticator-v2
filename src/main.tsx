@@ -7,6 +7,7 @@ import rootReducer from './reducers';
 
 import App from "./App";
 import "./styles.css";
+import 'tippy.js/dist/tippy.css';
 
 const store = configureStore({ reducer: rootReducer });
 
