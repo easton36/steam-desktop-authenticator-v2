@@ -20,7 +20,7 @@ const SetupSteamAccountModal = ({ isOpen, setIsOpen, triggerNotice }: { isOpen: 
 							enterTo="opacity-100 scale-100" leave="ease-in duration-200" leaveFrom="opacity-100 scale-100"
 							leaveTo="opacity-0 scale-95"
 						>
-							<Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white px-4 py-4 text-left align-middle shadow-xl transition-all">
+							<Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-md bg-white px-4 py-4 text-left align-middle shadow-xl transition-all">
 								<Dialog.Title as="h3" className="text-md font-medium leading-6 text-gray-900">
 									Setup New Account
 								</Dialog.Title>

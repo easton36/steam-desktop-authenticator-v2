@@ -69,7 +69,8 @@ export const listMaFiles = async () => {
 
 	const maFilesList = await readDir(maFilesFolder, { recursive: true });
 
-	return maFilesList;
+	// return array of filenames
+	return maFilesList.map((file: any) => file.name);
 };
 
 /**

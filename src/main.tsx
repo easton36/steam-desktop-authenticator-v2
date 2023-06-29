@@ -1,13 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-
 import { Provider } from 'react-redux';
-import { configureStore } from '@reduxjs/toolkit';
-import rootReducer from './reducers';
 
 import { checkDataStorageFolder } from './utils/dataStorage.util';
+import store from './store';
 
-const store = configureStore({ reducer: rootReducer });
 checkDataStorageFolder();
 import './translations/i18n';
 

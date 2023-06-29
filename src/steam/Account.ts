@@ -1,9 +1,10 @@
 import SteamCommunity from 'steamcommunity';
 import { LoginSession, EAuthTokenPlatformType } from 'steam-session';
 import SteamTotp from 'steam-totp';
+import Request from 'request';
 import { ConstructorOptions } from 'steam-session/dist/interfaces-external';
 
-interface AccountProps {
+export interface AccountProps {
 	steamId: string,
 	username: string,
 	password: string | null,
@@ -11,9 +12,8 @@ interface AccountProps {
 	identitySecret: string,
 	refreshToken: string,
 	proxy: {
-		httpProxy: string | null,
-		socksProxy: string | null
-	}
+		httpProxy: string | null
+	} | null
 };
 
 const Account = ({
@@ -23,19 +23,19 @@ const Account = ({
 	sharedSecret,
 	identitySecret,
 	refreshToken,
-	proxy: {
-		httpProxy,
-		socksProxy
-	}
+	proxy
 }: AccountProps) => {
-	const community = new SteamCommunity();
-	
 	const steamSessionOpts: ConstructorOptions = {};
-	if(httpProxy) steamSessionOpts['httpProxy'] = httpProxy;
-	if(socksProxy) steamSessionOpts['socksProxy'] = socksProxy;
+	if(proxy?.httpProxy) steamSessionOpts['httpProxy'] = proxy?.httpProxy;
+	// if(proxy?.socksProxy) steamSessionOpts['socksProxy'] = proxy?.socksProxy;
 
+	// steam community
+	const community: SteamCommunity = new SteamCommunity({
+		// @ts-ignore
+		request: Request.defaults(proxy?.httpProxy ? { proxy: proxy?.httpProxy } : {})
+	});
 	// Steam session
-	let session: LoginSession | null = null;	
+	let session: LoginSession | null = null;
 
 	/**
 	 * steam-session LoginSession event listener
@@ -112,8 +112,9 @@ const Account = ({
 	 * Fetch Steam account trade confirmations
 	 */
 	const fetchConfirmations = () => new Promise((resolve, reject) => {
-		const currentTime: number = Math.floor(Date.now() / 1000)
+		const currentTime: number = Math.floor(Date.now() / 1000);
 		const confirmationKey: string = SteamTotp.getConfirmationKey(identitySecret, currentTime, 'conf');
+
 		community.getConfirmations(currentTime, confirmationKey, (err, confirmations) => {
 			if(err) return reject(err);
 
@@ -139,6 +140,7 @@ const Account = ({
 		const currentTime: number = Math.floor(Date.now() / 1000)
 		const confirmationKey: string = SteamTotp.getConfirmationKey(identitySecret, currentTime, 'conf');
 		const allowKey: string = SteamTotp.getConfirmationKey(identitySecret, currentTime, 'allow');
+
 		community.acceptAllConfirmations(currentTime, confirmationKey, allowKey, (err) => {
 			if(err) return reject(err);
 

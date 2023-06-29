@@ -1,19 +1,33 @@
 const initialState = {
 	selectedAccount: '',
-	accounts: []
+	accounts: {},
+	steamIds: []
+};
+
+export interface SteamState {
+	selectedAccount: string,
+	accounts: any,
+	steamIds: string[]
 };
 
 const steam = (state = initialState, action: any) => {
 	switch (action.type) {
-		case 'SET_STEAM_ACCOUNTS':
+		case 'ADD_STEAM_ACCOUNT':
 			return {
 				...state,
-				accounts: action.accounts
+				accounts: {
+					...state.accounts,
+					[action.steamId]: action.account,
+				},
+				steamIds: [
+					...state.steamIds,
+					action.steamId
+				]
 			};
 		case 'SET_STEAM_SELECTED_ACCOUNT':
 			return {
 				...state,
-				selectedAccount: action.selectedAccount
+				selectedAccount: action.steamId
 			};
 		default:
 			return state;
