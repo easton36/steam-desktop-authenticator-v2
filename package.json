@@ -27,13 +27,18 @@
 		"react-dom": "^18.2.0",
 		"react-i18next": "^13.0.1",
 		"react-redux": "^8.1.1",
-		"redux-thunk": "^2.4.2"
+		"redux-thunk": "^2.4.2",
+		"steam-session": "^1.2.4",
+		"steam-totp": "^2.1.2",
+		"steamcommunity": "^3.46.1"
 	},
 	"devDependencies": {
 		"@tauri-apps/cli": "^1.4.0",
 		"@types/node": "^18.7.10",
 		"@types/react": "^18.0.15",
 		"@types/react-dom": "^18.0.6",
+		"@types/steam-totp": "^2.1.0",
+		"@types/steamcommunity": "^3.43.2",
 		"@typescript-eslint/eslint-plugin": "^5.60.1",
 		"@vitejs/plugin-react": "^3.0.0",
 		"eslint": "^8.43.0",

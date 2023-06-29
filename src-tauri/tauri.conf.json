@@ -27,6 +27,9 @@
 				"all": false,
 				"exists": true,
 				"createDir": true,
+				"readFile": true,
+				"writeFile": true,
+				"removeFile": true,
 				"scope": ["$APPCONFIG", "$APPCONFIG/maFiles"]
 			},
 			"path": {
