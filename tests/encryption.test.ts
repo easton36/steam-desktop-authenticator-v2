@@ -1,7 +1,7 @@
 import { getRandomSalt, getInitializationVector, encryptData, decryptData } from '../src/utils/encryption.util';
 import { describe, test, expect } from '@jest/globals';
 
-describe('FileEncryptor', () => {
+describe('Encryption', () => {
     const password = 'testPassword';
     const plaintext = 'This is a test message for encryption';
 
