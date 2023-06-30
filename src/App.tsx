@@ -10,13 +10,16 @@ import SettingsModal from "./components/Modals/SettingsModal";
 import NoticeModal from "./components/Modals/NoticeModal";
 import ImportAccountModal from "./components/Modals/ImportAccountModal";
 import SetupSteamAccountModal from "./components/Modals/SetupSteamAccountModal";
+import SetupEncryptionModal from "./components/Modals/SetupEncryptionModal";
 
 import TotpManager from "./components/TotpManager";
 import ConfirmationsManager from "./components/ConfirmationsManager";
 import AccountsList from "./components/AccountsList";
 import ThemeToggle from "./components/ThemeToggle";
 
-const App = ({ setupNewAccount }: { setupNewAccount: () => void}) => {
+const VERSION = "v0.0.0";
+
+const App = ({ setupNewAccount, setupEncryption }: { setupNewAccount: () => void, setupEncryption: () => void }) => {
 	const { t } = useTranslation();
 
 	const [greetMsg, setGreetMsg] = useState("");
@@ -39,7 +42,9 @@ const App = ({ setupNewAccount }: { setupNewAccount: () => void}) => {
 				}}>
 					{t('Setup New Account')}
 				</button>
-				<button type="button" className="flex-1 rounded-md bg-black bg-opacity-20 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
+				<button type="button" className="flex-1 rounded-md bg-black bg-opacity-20 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75" onClick={() => {
+					setupEncryption();
+				}}>
 					{t('Setup Encryption')}
 				</button>
 			</div>
@@ -53,19 +58,21 @@ const App = ({ setupNewAccount }: { setupNewAccount: () => void}) => {
 					{t('Download latest version')}
 				</a>
 
-				<p className="text-gray-400 text-xs">v0.0.0</p>
+				<p className="text-gray-400 text-xs">{VERSION}</p>
 			</div>
 
 			<SettingsModal />
 			<NoticeModal />
 			<ImportAccountModal />
 			<SetupSteamAccountModal />
+			<SetupEncryptionModal />
 		</div>
 	);
 };
 
 const mapDispatchToProps = (dispatch: any) => ({
 	setupNewAccount: () => dispatch({ type: 'SET_SETUP_STEAM_ACCOUNT_MODAL', isOpen: true }),
+	setupEncryption: () => dispatch({ type: 'SET_SETUP_ENCRYPTION_MODAL', isOpen: true }),
 	triggerNotice: (notice: { title: string, message: string }) => dispatch({ type: 'SET_NOTICE_MODAL', isOpen: true, title: notice.title, message: notice.message })
 });
 

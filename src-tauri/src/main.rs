@@ -30,7 +30,7 @@ fn main() {
 			rfd::MessageDialog::new()
 				.set_title("Steam Desktop Authenticator v2")
 				.set_description("The application is already running in the system tray.
-					\nLeft-click the icon to restore the window. Or right-click and select Restore Window.
+					\nLeft-click the lock icon to restore the window or right-click and select \"Restore Window\".
 					\nIf you can't see it, try clicking the arrow button in the system tray to show hidden icons.
 				")
 				.set_level(rfd::MessageLevel::Warning)

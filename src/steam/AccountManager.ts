@@ -5,10 +5,11 @@ import store, { RootState } from '../store';
 /**
  * redux store action to dispatch accounts
  */
-const dispatchAccount = (steamId: string, account: any) => {
+const dispatchAccount = (steamId: string, username: string, account: any) => {
 	return {
 		type: 'ADD_STEAM_ACCOUNT',
 		steamId,
+		username,
 		account
 	};
 };
@@ -51,7 +52,7 @@ export const initializeSteamAccounts = async () => {
 		
 		createdAccounts.push(steamId);
 		// dispatch to redux store
-		store.dispatch(dispatchAccount(steamId, account));
+		store.dispatch(dispatchAccount(steamId, maFileData.username, account));
 	}
 
 	// select first account

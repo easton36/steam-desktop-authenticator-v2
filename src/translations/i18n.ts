@@ -11,6 +11,12 @@ i18n
 		resources: {
 			en: {
 				translation: {
+					/*
+					 Commented out translations are because there are duplicate keys.
+					 They are staying in the English translation to keep developers aware that the text is in this file,
+					 but the keys do not need to be included in the other translations.
+					*/
+
 					// App.tsx
 					"Setup New Account": "Setup New Account",
 					"Setup Encryption": "Setup Encryption",
@@ -42,13 +48,37 @@ i18n
 
 					// components/Modals/SettingsModal.tsx
 					// "Settings": "Settings",
-					"checkForNewConfirmationsDesc": "Periodically check for new confirmations and show a popup when they arrive",
+					"checkForNewConfirmationsDesc": "Periodically check for new confirmations and send a notification when they arrive",
 					"secondsBetweenChecksDesc": "Seconds between checking for confirmations",
 					"checkAllAccountsDesc": "Check all Steam accounts for confirmations",
 					"autoConfirmMarketDesc": "Auto-confirm Steam community market listings",
 					"autoConfirmTradesDesc": "Auto-confirm Steam trades",
 					"minimalModeDesc": "Minimal UI Mode (Feels more like original SDA)",
 					"Save Settings": "Save Settings",
+
+					// components/Modals/SetupSteamAccountModal.tsx
+					// "Setup New Account": "Setup New Account",
+					"SetupAccountModalDesc": "This will activate Steam Desktop Authenticator v2 on your Steam account. This process requires a phone number that can receive SMS messages.",
+					"Login": "Login",
+					// "Cancel": "Cancel",
+
+					// components/Modals/SetupEncryptionModal.tsx
+					// "Setup Encryption": "Setup Encryption",
+					"passwordDescription": "Your password will be used to encrypt your data. You will need this password to access your data in the future. If you forget this password, you will not be able to access your data.",
+					"WARNING": "WARNING",
+					"noEncryptWarning": "You chose not to encrypt your files. Doing so imposes a security risk for yourself. If an attacker were to gain access to your computer, they could completely lock you out of your account and steal all of your items.",
+					"Accept": "Accept",
+					// "Cancel": "Cancel",
+
+					// components/AccountsList.tsx
+					"Account": "Account",
+					"View Confirmations": "View Confirmations",
+
+					// components/TotpManager.tsx
+					"Login Token": "Login Token",
+					"Copy": "Copy",
+					"seconds remaining": "seconds remaining",
+					"Copied": "Copied",
 				}
 			}
 		},

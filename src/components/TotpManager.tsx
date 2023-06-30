@@ -1,29 +1,31 @@
 import { connect } from "react-redux";
 import React, { useState, useEffect } from 'react';
 import Tippy, { tippy } from '@tippyjs/react';
+import { useTranslation } from 'react-i18next';
 
 const TotpManager = () => {
+	const { t } = useTranslation();
+	
 	const totpCode = 'DQV3N'; // Replace with your actual TOTP code
 	const initialSeconds = 30;
 	const [secondsRemaining, setSecondsRemaining] = useState(initialSeconds);
 	
 	useEffect(() => {
 		const timer = setInterval(() => {
-		  if (secondsRemaining > 0) {
-			setSecondsRemaining((prevSeconds) => prevSeconds - 1);
-		  } else {
-			setSecondsRemaining(initialSeconds);
-		  }
+			if (secondsRemaining > 0) {
+				setSecondsRemaining((prevSeconds) => prevSeconds - 1);
+			} else {
+				setSecondsRemaining(initialSeconds);
+			}
 		}, 1000);
 	
 		return () => {
-		  clearInterval(timer);
+		  	clearInterval(timer);
 		};
 	  }, [secondsRemaining]);
 
 	const copyToClipboard = () => {
 		navigator.clipboard.writeText(totpCode);
-		// You can also add some visual feedback to indicate the code was copied
 	};
 
 	const progressStyle = {
@@ -32,11 +34,10 @@ const TotpManager = () => {
 	};
 
 	// tippy copyButton will be triggered on click
-	// tippy progressStyle will be triggered on hover
 	useEffect(() => {
 		tippy('#copyButton', {
 			trigger: 'click',
-			content: 'Copied!',
+			content: `${t('Copied')}!`,
 			duration: 500,
 			theme: 'success'
 		});
@@ -45,7 +46,7 @@ const TotpManager = () => {
 	return (
 		<div className="relative border border-white rounded-md p-2 pt-3 mt-2 flex flex-row items-center">
 			<div className="absolute left-2 -top-2.5 text-white text-xs bg-gray-700 px-1">
-				Login Token
+				{t('Login Token')}
 			</div>
 
 			<div className="flex flex-col w-full">
@@ -56,12 +57,12 @@ const TotpManager = () => {
 						className="ml-2 bg-violet-500 hover:bg-violet-400 duration-100 text-white px-5 py-2 rounded h-10"
 						onClick={copyToClipboard}
 					>
-						Copy
+						{t('Copy')}
 					</button>
 				</div>
 
 				<Tippy theme="SDA" content={
-					<p>{secondsRemaining} seconds remaining</p>
+					<p>{secondsRemaining} {t('seconds remaining')}</p>
 				}>
 					<div id="progressBar" className="relative h-4 bg-gray-100 mt-2 rounded-md">
 						<div className={`absolute top-0 left-0 h-full bg-green-500 rounded-l-md ${secondsRemaining === initialSeconds || secondsRemaining === 0 ? 'rounded-r-md' : ''}`} style={progressStyle} />

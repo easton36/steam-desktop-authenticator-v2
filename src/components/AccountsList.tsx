@@ -1,83 +1,40 @@
 import { connect } from "react-redux";
-import React, { useState, useEffect } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { RadioGroup } from '@headlessui/react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleCheck } from '@fortawesome/free-solid-svg-icons';
 
-const originalAccounts = [
-	{
-		  name: 'testAccount123'
-	},
-	{
-		name: 'testAccount456'
-	},
-	{
-		name: 'testAccount789'
-	},
-	{
-		name: 'testAccount321'
-	},
-	{
-		name: 'testAccount654'
-	},
-	{
-		name: 'testAccount987'
-	}
-];
-
-const AccountsList = () => {
-	const [accounts, setAccounts] = useState([
-		{
-			  name: 'testAccount123'
-		},
-		{
-			name: 'testAccount456'
-		},
-		{
-			name: 'testAccount789'
-		},
-		{
-			name: 'testAccount321'
-		},
-		{
-			name: 'testAccount654'
-		},
-		{
-			name: 'testAccount987'
-		}
-	]);
-	const [selected, setSelected] = useState(accounts[1]);
+const AccountsList = ({ accounts, selectedAccount, setSelectedAccount }: { accounts: string[], selectedAccount: string, setSelectedAccount: (username: string) => void }) => {
 	const [accountFilter, setAccountFilter] = useState('');
 
-	useEffect(() => {
+	const filteredAccounts = useMemo(() => {
 		if (accountFilter.length > 0) {
-			setAccounts(originalAccounts.filter((account) => {
-				return account.name.toLowerCase().includes(accountFilter.toLowerCase());
-			}));
+			return accounts.filter((account) => {
+				return account.toLowerCase().includes(accountFilter.toLowerCase());
+			});
 		} else {
-			setAccounts(originalAccounts);
+			return accounts;
 		}
-	}, [accountFilter]);
+	}, [accountFilter, accounts]);
 
 	return (
 		<>
 		<div className="relative border border-white rounded-md p-2 flex-grow overflow-y-scroll">
-			<RadioGroup value={selected} onChange={setSelected}>
-				<RadioGroup.Label className="sr-only">Server size</RadioGroup.Label>
+			<RadioGroup value={selectedAccount} onChange={setSelectedAccount}>
 				<div className="space-y-1">
-					{accounts.map((account) => (
-						<RadioGroup.Option key={account.name} value={account} className={({ active, checked }) => `${active ? 'ring-1 ring-white ring-opacity-60 ring-offset-1 ring-offset-violet-300' : ''}
+					{filteredAccounts.map((account: string) => (
+						<RadioGroup.Option key={account} value={account} className={({ active, checked }) => `${active ? 'ring-1 ring-white ring-opacity-60 ring-offset-1 ring-offset-violet-300' : ''}
 							${checked ? 'bg-violet-500 bg-opacity-75 text-white' : 'bg-white'}
 							relative flex cursor-pointer rounded-md px-3 py-2 shadow-md focus:outline-none`}
-							onClick={() => setSelected(account)}
+							// onClick={() => setSelectedAccount(account)}
 						>
 							{({ active, checked }) => (
 								<div className="flex flex-row w-full items-center justify-between">
 									<div className="flex items-center">
 										<div className="text-14">
-											<RadioGroup.Label as="p" className={`font-medium ${ checked ? 'text-white' : 'text-black' }`}>
-												{account.name}
+											<RadioGroup.Label as="p" className={`font-medium ${checked ? 'text-white' : 'text-black' }`}>
+												{account}
 											</RadioGroup.Label>
 										</div>
 									</div>
@@ -104,4 +61,13 @@ const AccountsList = () => {
 	);
 };
 
-export default connect()(AccountsList);
+const mapStateToProps = (state: any) => ({
+	accounts: Object.keys(state.steam.usernameToSteamId),
+	selectedAccount: state.steam.selectedAccountUsername
+});
+
+const mapDispatchToProps = (dispatch: any) => ({
+	setSelectedAccount: (username: string) => dispatch({ type: 'SET_STEAM_SELECTED_ACCOUNT_BY_USERNAME', username })
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(AccountsList);

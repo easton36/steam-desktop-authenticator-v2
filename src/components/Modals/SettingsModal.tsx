@@ -1,19 +1,12 @@
 import { Dialog, Transition } from '@headlessui/react';
-import { Fragment, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { Switch } from '@headlessui/react';
 import { connect } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+import { requestNotificationsPermission, notify } from '../../utils/notifications.util';
 
 const SettingsModal = ({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: (value: boolean) => void }) => {
 	const { t } = useTranslation();
-
-	const [settings, setSettings] = useState({
-		checkForNewConfirmations: false,
-		secondsBetweenChecks: 5,
-		checkAllAccounts: false,
-		autoConfirmMarket: false,
-		autoConfirmTrades: false
-	} as any);
 
 	const [checkForNewConfirmations, setCheckForNewConfirmations] = useState(false);
 	const [secondsBetweenChecks, setSecondsBetweenChecks] = useState(5);
@@ -25,6 +18,20 @@ const SettingsModal = ({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: (val
 	const saveSettings = () => {
 		setIsOpen(false);
 	};
+
+	const notificationSetting = async () => {
+		console.log('requesting notifications permission');
+		const permission = await requestNotificationsPermission();
+		if(permission){
+			notify('Notifications enabled', 'You will now receive notifications when new confirmations are available.');
+		}
+	};
+
+	useEffect(() => {
+		if(checkForNewConfirmations){
+			notificationSetting();
+		}
+	}, [checkForNewConfirmations]);
 
 	return (
 		<Transition appear show={isOpen} as={Fragment}>
