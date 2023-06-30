@@ -69,7 +69,7 @@ export const initializeSteamAccounts = async () => {
 export const getSteamAccount = (steamId: string) => {
 	const state: RootState = store.getState();
 
-	return state.steam?.accounts[steamId];
+	return state.settings?.accounts[steamId];
 };
 
 /**
@@ -78,5 +78,5 @@ export const getSteamAccount = (steamId: string) => {
 export const getSelectedSteamAccount = () => {
 	const state: RootState = store.getState();
 
-	return state.steam?.accounts[state.steam?.selectedAccount];
+	return state.settings?.accounts[state.settings?.selectedAccount];
 };

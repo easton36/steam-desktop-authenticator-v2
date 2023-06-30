@@ -1,5 +1,6 @@
 import { exists, createDir, writeFile, removeFile, readTextFile, readDir } from '@tauri-apps/api/fs';
 import { join, appConfigDir } from '@tauri-apps/api/path';
+import { initialState } from '../reducers/settings';
 
 /**
  * Check if the data storage folder exists, if not, create it
@@ -78,19 +79,35 @@ export const listMaFiles = async () => {
  */
 export const loadSettings = async () => {
 	const dataStorageFolder = await checkDataStorageFolder();
-	const settingsFile = await join(dataStorageFolder, 'manifest.json');
+	const settingsFile = await join(dataStorageFolder, 'settings.json');
 
 	const settingsFileExists = await exists(settingsFile);
 	// if the settings file doesnt exist, create it
 	if(!settingsFileExists){
-		await writeFile(settingsFile, JSON.stringify({
-			encrypted: false,
-			first_run: true,
-			accounts: []
-		}));
+		await writeFile(settingsFile, JSON.stringify(initialState));
 	}
 
 	const settingsFileData = await readTextFile(settingsFile);
 
 	return JSON.parse(settingsFileData);
 };
+
+/**
+ * Save settings file
+ */
+export const saveSettings = async (settings: any) => {
+	const dataStorageFolder = await checkDataStorageFolder();
+	const settingsFile = await join(dataStorageFolder, 'settings.json');
+
+	// load the settings file so we can merge the new settings with the old ones
+	const oldSettings = await loadSettings();
+	// merge the new settings with the old ones
+	settings = {
+		...oldSettings,
+		...settings
+	};
+
+	await writeFile(settingsFile, JSON.stringify(settings));
+
+	return true;
+}

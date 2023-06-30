@@ -5,7 +5,8 @@ import noticeModal from './noticeModal';
 import importAccountModal from './importAccountModal';
 import setupSteamAccountModal from './setupSteamAccountModal';
 import setupEncryptionModal from './setupEncryptionModal';
-import steam from './steam';
+// import steam from './steam';
+import settings from './settings';
 
 export default combineReducers({
 	settingsModal,
@@ -13,5 +14,6 @@ export default combineReducers({
 	importAccountModal,
 	setupSteamAccountModal,
 	setupEncryptionModal,
-	steam
+	// steam,
+	settings
 });

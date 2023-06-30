@@ -5,17 +5,36 @@ import { connect } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { requestNotificationsPermission, notify } from '../../utils/notifications.util';
 
-const SettingsModal = ({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: (value: boolean) => void }) => {
+const SettingsModal = ({
+	isOpen,
+	setIsOpen,
+	settings,
+	setSettings
+}: {
+	isOpen: boolean,
+	setIsOpen: (value: boolean) => void,
+	settings: any,
+	setSettings: (settings: any) => void
+}) => {
 	const { t } = useTranslation();
 
-	const [checkForNewConfirmations, setCheckForNewConfirmations] = useState(false);
-	const [secondsBetweenChecks, setSecondsBetweenChecks] = useState(5);
-	const [checkAllAccounts, setCheckAllAccounts] = useState(false);
-	const [autoConfirmMarket, setAutoConfirmMarket] = useState(false);
-	const [autoConfirmTrades, setAutoConfirmTrades] = useState(false);
-	const [minimalMode, setMinimalMode] = useState(false);
+	const [checkForNewConfirmations, setCheckForNewConfirmations] = useState(settings?.checkForNewConfirmations || false);
+	const [secondsBetweenChecks, setSecondsBetweenChecks] = useState(settings?.secondsBetweenChecks || 5);
+	const [checkAllAccounts, setCheckAllAccounts] = useState(settings?.checkAllAccounts || false);
+	const [autoConfirmMarket, setAutoConfirmMarket] = useState(settings?.autoConfirmMarket || false);
+	const [autoConfirmTrades, setAutoConfirmTrades] = useState(settings?.autoConfirmTrades || false);
+	const [minimalMode, setMinimalMode] = useState(settings?.minimalMode || false);
 
 	const saveSettings = () => {
+		setSettings({
+			checkForNewConfirmations,
+			secondsBetweenChecks,
+			checkAllAccounts,
+			autoConfirmMarket,
+			autoConfirmTrades,
+			minimalMode
+		});
+
 		setIsOpen(false);
 	};
 
@@ -167,11 +186,13 @@ const SettingsModal = ({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: (val
 };
 
 const mapStateToProps = (state: any) => ({
-	isOpen: state.settingsModal.isOpen
+	isOpen: state.settingsModal.isOpen,
+	settings: state.settings
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
-	setIsOpen: (isOpen: Boolean) => dispatch({ type: 'SET_SETTINGS_MODAL', isOpen: isOpen })
+	setIsOpen: (isOpen: Boolean) => dispatch({ type: 'SET_SETTINGS_MODAL', isOpen: isOpen }),
+	setSettings: (settings: any) => dispatch({ type: 'SET_SETTINGS', settings: settings })
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SettingsModal);

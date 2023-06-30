@@ -1,5 +1,6 @@
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useEffect, useRef, useState } from 'react';
+import { Switch } from '@headlessui/react';
 import { connect } from 'react-redux';
 import Tippy from '@tippyjs/react';
 import { useTranslation } from 'react-i18next';
@@ -9,6 +10,8 @@ const NoticeModal = ({ isOpen, setIsOpen, triggerNotice }: { isOpen: boolean, se
 	
 	const fileInputRef = useRef<HTMLInputElement>(null);
 	const [importedAccountFile, setImportedAccountFile] = useState<Object | null>(null);
+
+	const [isEncrypted, setIsEncrypted] = useState<boolean>(false);
 	const [passkey, setPasskey] = useState<string>('');
 
 	const getFileExtension = (filename: string) => {
@@ -59,22 +62,44 @@ const NoticeModal = ({ isOpen, setIsOpen, triggerNotice }: { isOpen: boolean, se
 							enterTo="opacity-100 scale-100" leave="ease-in duration-200" leaveFrom="opacity-100 scale-100"
 							leaveTo="opacity-0 scale-95"
 						>
-							<Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-md bg-white px-4 py-4 text-left align-middle shadow-xl transition-all">
+							<Dialog.Panel className="w-full h-auto max-w-md transform overflow-hidden rounded-md bg-white px-4 py-4 text-left align-middle shadow-xl transition-all">
 								<Dialog.Title as="h3" className="text-md font-medium leading-6 text-gray-900">
 									{t('Import Account')}
 								</Dialog.Title>
-								<div className="mt-2">
-									<p className="text-xs text-gray-600">
-										{t('Enter encryption passkey')}:
-									</p>
-									<Tippy theme="SDA" content={
+								<div className="mt-2 flex flex-col gap-2">
+									<div className="flex flex-row items-center gap-2">
+										<Switch checked={isEncrypted} onChange={setIsEncrypted} className={`${isEncrypted ? 'bg-violet-700' : 'bg-violet-300' } relative
+											inline-flex h-[20px] w-[35px] shrink-0 cursor-pointer rounded-full border-2 border-transparent
+											transition-colors duration-200 ease-in-out
+											focus-visible:ring-opacity-75`}
+										>
+											<span aria-hidden="true" className={`${isEncrypted ? 'translate-x-4' : 'translate-x-0' } pointer-events-none
+												inline-block h-[16px] w-[16px] transform rounded-full bg-white shadow-lg ring-0 transition duration-200
+												ease-in-out`} />
+										</Switch>
+										<p className="text-12 leading-tight">
+											{t('accountIsEncryptedDesc')}
+										</p>
+									</div>
+
+									{isEncrypted && (
 										<>
-											<center><b>{t('Notice')}:</b></center>
-											<p>{t('Compatibility Notice')}</p>
+											<div>
+												<p className="text-xs text-gray-600">
+													{t('Enter encryption passkey')}:
+												</p>
+												<Tippy theme="SDA" content={
+													<>
+														<center><b>{t('Notice')}:</b></center>
+														<p>{t('Compatibility Notice')}</p>
+													</>
+												}>
+													<input id="passkeyPrompt" type="text" value={passkey} onChange={(e) => setPasskey(e.currentTarget.value)} className="w-full mt-2 border border-gray-300 rounded-md px-3 py-2 text-xs text-gray-900 focus:outline-none focus:ring-1 focus:ring-violet-500 focus:border-violet-500" />
+												</Tippy>
+											</div>
+											
 										</>
-									}>
-										<input id="passkeyPrompt" type="text" value={passkey} onChange={(e) => setPasskey(e.currentTarget.value)} className="w-full mt-2 border border-gray-300 rounded-md px-3 py-2 text-xs text-gray-900 focus:outline-none focus:ring-1 focus:ring-violet-500 focus:border-violet-500" />
-									</Tippy>
+									)}
 								</div>
 
 								<div className="mt-4 flex flex-row items-center gap-2">

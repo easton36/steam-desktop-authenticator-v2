@@ -6,7 +6,7 @@ export interface RootState {
 	noticeModal: any,
 	importAccountModal: any,
 	setupSteamAccountModal: any,
-	steam: any
+	settings: any,
 };
 
 const store = configureStore({ reducer: rootReducer });

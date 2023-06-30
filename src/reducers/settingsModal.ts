@@ -3,7 +3,7 @@ const initialState = {
 };
 
 const settingsModal = (state = initialState, action: any) => {
-	switch (action.type) {
+	switch(action.type){
 		case 'SET_SETTINGS_MODAL':
 			return {
 				...state,

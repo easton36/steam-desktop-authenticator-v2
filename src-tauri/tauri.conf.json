@@ -30,7 +30,7 @@
 				"readFile": true,
 				"writeFile": true,
 				"removeFile": true,
-				"scope": ["$APPCONFIG", "$APPCONFIG/maFiles"]
+				"scope": ["$APPCONFIG", "$APPCONFIG/maFiles", "$APPCONFIG/settings.json", "$APPCONFIG/maFiles/*.maFile"]
 			},
 			"path": {
 				"all": true

@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { invoke } from "@tauri-apps/api/tauri";
 import { connect } from "react-redux";
 import { useTranslation } from "react-i18next";
+import { loadSettings } from './utils/dataStorage.util';
 
 import Options from "./components/Dropdowns/Options";
 import SelectedAccount from "./components/Dropdowns/SelectedAccount";
@@ -19,11 +20,25 @@ import ThemeToggle from "./components/ThemeToggle";
 
 const VERSION = "v0.0.0";
 
-const App = ({ setupNewAccount, setupEncryption }: { setupNewAccount: () => void, setupEncryption: () => void }) => {
+const App = ({ setupNewAccount, setupEncryption, setSettings }: {
+	setupNewAccount: () => void,
+	setupEncryption: () => void,
+	setSettings: (settings: any) => void
+}) => {
 	const { t } = useTranslation();
 
 	const [greetMsg, setGreetMsg] = useState("");
-	const [name, setName] = useState("");
+
+	const loadInitialSettingsToStore = async () => {
+		const settings = await loadSettings();
+		console.log('Settings loaded: ', settings);
+		// will load settings into redux store but not write to disk, since we just loaded them from disk
+		setSettings(settings);
+	};
+
+	useEffect(() => {
+		loadInitialSettingsToStore();
+	}, []);
 
 	// useEffect(() => {
 	// 	document.addEventListener('contextmenu', event => event.preventDefault());
@@ -73,7 +88,8 @@ const App = ({ setupNewAccount, setupEncryption }: { setupNewAccount: () => void
 const mapDispatchToProps = (dispatch: any) => ({
 	setupNewAccount: () => dispatch({ type: 'SET_SETUP_STEAM_ACCOUNT_MODAL', isOpen: true }),
 	setupEncryption: () => dispatch({ type: 'SET_SETUP_ENCRYPTION_MODAL', isOpen: true }),
-	triggerNotice: (notice: { title: string, message: string }) => dispatch({ type: 'SET_NOTICE_MODAL', isOpen: true, title: notice.title, message: notice.message })
+	triggerNotice: (notice: { title: string, message: string }) => dispatch({ type: 'SET_NOTICE_MODAL', isOpen: true, title: notice.title, message: notice.message }),
+	setSettings: (settings: any) => dispatch({ type: 'SET_SETTINGS', settings: settings, intialLoad: true })
 });
 
 export default connect(null, mapDispatchToProps)(App);

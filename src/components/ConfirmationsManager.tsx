@@ -1,9 +1,20 @@
 import { connect } from "react-redux";
-import React, { useState, useEffect } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
-const ConfirmationsManager = ({ accountName }: { accountName: string }) => {
+const ConfirmationsManager = ({ selectedAccount, accounts }: {
+	selectedAccount: string,
+	accounts: {
+		[steamId: string]: string
+	}
+}) => {
 	const { t } = useTranslation();
+
+	const accountName = useMemo(() => {
+		console.log(selectedAccount, accounts);
+
+		return accounts[selectedAccount];
+	}, [selectedAccount, accounts]);
 
 	return (
 		<div className="relative border border-white rounded-md p-2 pt-3 mt-2 flex flex-row items-center">
@@ -22,7 +33,8 @@ const ConfirmationsManager = ({ accountName }: { accountName: string }) => {
 };
 
 const mapStateToProps = (state: any) => ({
-	accountName: state.steam.selectedAccountUsername
+	selectedAccount: state.settings.selectedAccount,
+	accounts: state.settings.steamIdToUsername,
 });
 
 export default connect(mapStateToProps)(ConfirmationsManager);

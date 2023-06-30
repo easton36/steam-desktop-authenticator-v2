@@ -2,10 +2,10 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { Provider } from 'react-redux';
 
-import { checkDataStorageFolder } from './utils/dataStorage.util';
+// import { checkDataStorageFolder } from './utils/dataStorage.util';
 import store from './store';
 
-checkDataStorageFolder();
+// checkDataStorageFolder();
 import './translations/i18n';
 
 import App from "./App";

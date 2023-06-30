@@ -37,11 +37,12 @@ i18n
 
 					// components/Modals/ImportAccountModal.tsx
 					// "Import Account": "Import Account",
-					"Enter encryption passkey": "Enter your encryption passkey if your .maFile is encrypted",
+					"Enter encryption passkey": "Enter your encryption passkey",
 					"Notice": "Notice",
 					"Compatibility Notice": "Old ENCRYPTED .maFiles are not compatible with this version of the app. You will need to decrypt your .maFile with the original SDA and re-encrypt it with this version of the app. Non-encrypted .maFiles are fully compatible.",
 					"Select .maFile to Import": "Select .maFile to Import",
 					"Cancel": "Cancel",
+					"accountIsEncryptedDesc": ".maFile is encrypted",
 
 					// components/Modals/NoticeModal.tsx
 					"OK": "OK",
