@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import Account, { AccountProps } from './Account';
 import { listMaFiles, readMaFile } from '../utils/dataStorage.util';
 import store, { RootState } from '../store';

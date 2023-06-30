@@ -36,6 +36,7 @@ If you did not follow the directions and did not write your revocation code down
  - Custom accent colors
  - Tray icon with context menu
  - Auto-start on system login
+ - Exit and stay running in system tray
 
 ## Contributing
 If you want to contribute to the project, please read the [Contributing](https://github.com/easton36/steam-desktop-authenticator-v2/blob/master/CONTRIBUTING.md) document first.

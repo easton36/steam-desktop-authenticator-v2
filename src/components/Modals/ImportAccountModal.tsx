@@ -42,7 +42,7 @@ const NoticeModal = ({ isOpen, setIsOpen, triggerNotice }: { isOpen: boolean, se
 		const maFile = await getFileContents(file);
 		setImportedAccountFile(maFile as Object);
 
-		console.log(importedAccountFile)
+		console.log(importedAccountFile);
 	};
 	
 	return (

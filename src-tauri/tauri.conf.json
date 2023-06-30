@@ -53,12 +53,15 @@
 		},
 		"windows": [{
 			"fullscreen": false,
+			"maximizable": false,
 			"resizable": true,
 			"title": "Steam Desktop Authenticator v2",
 			"width": 350,
 			"height": 530,
 			"minWidth": 350,
-			"minHeight": 475
+			"minHeight": 475,
+			"maxWidth": 1024,
+			"maxHeight": 1400
 		}],
 		"updater": {
 			"active": true,
