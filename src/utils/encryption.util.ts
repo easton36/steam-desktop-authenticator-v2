@@ -1,4 +1,4 @@
-const CryptoJS = require('crypto-js');
+import CryptoJS from 'crypto-js';
 
 const PBKDF2_ITERATIONS = 50000;
 const SALT_LENGTH = 8; // in bytes
@@ -74,9 +74,8 @@ export const decryptData = (password: string, passwordSalt: string, IV: string, 
 			padding: CryptoJS.pad.Pkcs7
 		});
 		const plainText = decrypted.toString(CryptoJS.enc.Utf8);
-		
-		// Check if the decrypted data is valid UTF-8
-		if(!isValidUtf8(plainText) || plainText === '') {
+		// Check if the decrypted data is valid
+		if(!plainText || plainText === '') {
             return null;
         }
 
@@ -87,17 +86,4 @@ export const decryptData = (password: string, passwordSalt: string, IV: string, 
 		
 		return null;
 	}
-}
-
-/**
- * Checks if a string is valid UTF-8.
- */
-const isValidUtf8 = (str: string) => {
-    try {
-        Buffer.from(str, 'utf8').toString();
-
-        return true;
-    } catch (e) {
-        return false;
-    }
 }

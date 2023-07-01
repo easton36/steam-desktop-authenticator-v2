@@ -77,6 +77,7 @@ const Account = ({
 		// if we already have a refreshToken, we don't need to login again
 		if(refreshToken){
 			session.refreshToken = refreshToken;
+			await session.forcePoll();
 			await session.refreshAccessToken();
 
 			return true;

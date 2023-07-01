@@ -11,8 +11,6 @@ const ConfirmationsManager = ({ selectedAccount, accounts }: {
 	const { t } = useTranslation();
 
 	const accountName = useMemo(() => {
-		console.log(selectedAccount, accounts);
-
 		return accounts[selectedAccount];
 	}, [selectedAccount, accounts]);
 

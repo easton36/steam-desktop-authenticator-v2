@@ -1,6 +1,8 @@
 import { saveSettings } from '../utils/dataStorage.util';
 
 export const initialState: SettingsState = {
+	encrypted: false,
+	firstRun: true,
 	checkForNewConfirmations: false,
 	secondsBetweenChecks: 5,
 	checkAllAccounts: false,
@@ -17,10 +19,13 @@ export const initialState: SettingsState = {
 		'76561198853737321': 'testAccount321',
 		'76561198853737654': 'testAccount654',
 		'76561198853737987': 'testAccount987'
-	}
+	},
+	accountManifests: {},
 };
 
 interface SettingsState {
+	encrypted: boolean,
+	firstRun: boolean,
 	checkForNewConfirmations: boolean,
 	secondsBetweenChecks: number,
 	checkAllAccounts: boolean,
@@ -33,6 +38,13 @@ interface SettingsState {
 	steamIdToUsername: {
 		[steamId: string]: string
 	},
+	accountManifests: {
+		[steamId: string]: {
+			encryption_iv: string | null,
+			encryption_salt: string | null,
+			filename: string
+		}
+	}
 };
 
 const settings = (state = initialState, action: any) => {
@@ -54,7 +66,7 @@ const settings = (state = initialState, action: any) => {
 				saveSettings(newSettings);
 			}
 
-			console.log('newSettings', newSettings)
+			console.log('Settings Saved:', newSettings);
 
 			return newSettings;
 		case 'ADD_STEAM_ACCOUNT':

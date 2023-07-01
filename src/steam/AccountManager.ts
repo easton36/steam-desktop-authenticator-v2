@@ -28,6 +28,7 @@ export const setSelectedAccount = (steamId: string) => {
  * Initializes the Steam accounts.
  */
 export const initializeSteamAccounts = async () => {
+	// TODO: replace listMaFiles with function parameters. other logic will have already been done to get the maFiles and decrypt them, if necessary
 	const maFiles = await listMaFiles();
 
 	const createdAccounts: string[] = [];
@@ -61,6 +62,13 @@ export const initializeSteamAccounts = async () => {
 	}
 
 	return createdAccounts;
+};
+
+/**
+ * Initializes a single Steam account.
+ */
+export const initializeSteamAccount = async (maFileData: any) => {
+
 };
 
 /**

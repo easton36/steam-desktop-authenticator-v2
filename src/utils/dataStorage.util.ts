@@ -14,7 +14,7 @@ export const checkDataStorageFolder = async () => {
 		await createDir(await join(dataStorageFolder, 'maFiles'));
 	}
 
-	console.log(dataStorageFolder);
+	console.log('Data Storage Folder:', dataStorageFolder);
 
 	return dataStorageFolder;
 };

@@ -1,5 +1,5 @@
 const initialState = {
-	isOpen: false
+	isOpen: true
 };
 
 const importAccountModal = (state = initialState, action: any) => {

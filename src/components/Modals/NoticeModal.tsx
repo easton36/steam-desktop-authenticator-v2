@@ -25,7 +25,7 @@ const NoticeModal = ({ title, message, isOpen, setIsOpen }: { title: string, mes
 									{title}
 								</Dialog.Title>
 								<div className="mt-2">
-									<p className="text-sm text-gray-500 leading-tight">
+									<p className="text-12 text-gray-700 leading-snug">
 										{message}
 									</p>
 								</div>
