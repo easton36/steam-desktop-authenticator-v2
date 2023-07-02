@@ -15,7 +15,25 @@
 			"all": false,
 			"shell": {
 				"all": false,
-				"open": true
+				"open": true,
+				"execute": true,
+				"scope": [
+					{
+						"name": "open-windows-folder",
+						"cmd": "powershell",
+						"args": ["Start-Process", "explorer.exe", "-ArgumentList", { "validator": "" }]
+					},
+					{
+						"name": "open-linux-folder",
+						"cmd": "xdg-open",
+						"args": [{ "validator": "" }]
+					},
+					{
+						"name": "open-macos-folder",
+						"cmd": "open",
+						"args": ["-R", { "validator": "" }]
+					}
+				]
 			},
 			"process": {
 				"all": false,
@@ -36,6 +54,9 @@
 				"all": true
 			},
 			"notification": {
+				"all": true
+			},
+			"os": {
 				"all": true
 			}
 		},

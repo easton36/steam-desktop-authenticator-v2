@@ -67,6 +67,8 @@ i18n
 					"autoConfirmTradesDesc": "Auto-confirm Steam trades",
 					"minimalModeDesc": "Minimal UI Mode (Feels more like original SDA)",
 					"Save Settings": "Save Settings",
+					"Open": "Open",
+					"OpenBtnDesc": "Open maFiles folder",
 
 					// components/Modals/SetupSteamAccountModal.tsx
 					// "Setup New Account": "Setup New Account",

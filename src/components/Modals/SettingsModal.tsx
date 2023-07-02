@@ -4,6 +4,8 @@ import { Switch } from '@headlessui/react';
 import { connect } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { requestNotificationsPermission, notify } from '../../utils/notifications.util';
+import { shell, os } from "@tauri-apps/api";
+import { join, appConfigDir } from '@tauri-apps/api/path';
 
 const SettingsModal = ({
 	isOpen,
@@ -51,6 +53,48 @@ const SettingsModal = ({
 			notificationSetting();
 		}
 	}, [checkForNewConfirmations]);
+
+	const openMaFilesFolder = async () => {
+		const platform = await os.platform();
+		const maFilesFolder = await join(await appConfigDir(), 'maFiles');
+		switch(platform){
+			case 'win32': {
+				const command = new shell.Command('open-windows-folder', [
+					'Start-Process',
+					'explorer.exe',
+					'-FilePath',
+					maFilesFolder
+				]);
+
+				const child = await command.spawn();
+
+				return child;
+			}
+			case 'darwin': {
+				const command = new shell.Command('open-mac-folder', [
+					'open',
+					'-R',
+					maFilesFolder
+				]);
+
+				const child = await command.spawn();
+
+				return child;
+			}
+			case 'linux': {
+				const command = new shell.Command('open-linux-folder', [
+					'xdg-open',
+					maFilesFolder
+				]);
+
+				const child = await command.spawn();
+
+				return child;
+			}
+			default:
+				return false;
+		}
+	};
 
 	return (
 		<Transition appear show={isOpen} as={Fragment}>
@@ -164,6 +208,23 @@ const SettingsModal = ({
 										</Switch>
 										<p className="text-12 leading-tight">
 											{t('minimalModeDesc')}
+										</p>
+									</div>
+								</div>
+
+								<hr className="m-2"/>
+
+								<div className="mt-2 flex flex-col gap-2">
+									<div className="flex flex-row items-center gap-2">
+										<button type="button" 
+											className="inline-flex justify-center rounded-md border border-transparent bg-violet-100 px-3 py-1.5 text-12 font-medium text-violet-900 hover:bg-violet-200 focus:outline-none focus-visible:ring-1 focus-visible:ring-violet-500 focus-visible:ring-offset-21"
+											onClick={openMaFilesFolder}
+										>
+											{t('Open')}
+										</button>
+
+										<p className="text-12 leading-tight">
+											{t('OpenBtnDesc')}
 										</p>
 									</div>
 								</div>

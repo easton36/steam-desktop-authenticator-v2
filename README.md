@@ -23,12 +23,18 @@ IF you lost your `maFiles` OR lost your encryption key, go [here](https://store.
 
 If you did not follow the directions and did not write your revocation code down, you're well and truly screwed. The only option is beg to [Steam Support](https://support.steampowered.com/) and say you lost your mobile authenticator and the revocation code.
 
+## Compatibility Notice
+ - Iconic "maFiles" are now just "JSON" files, but will still be referred to as "maFiles" in the app
+ - Original SDA maFiles are able to be imported into SDA v2, but will be converted to the new format
+	- This means that you will not be able to use the original SDA with the maFiles that were converted to the new format
+
 ## Features
  - Manage many Steam accounts at once
  - View and confirm all pending Steam trades and market listings
  - Add and remove Steam Guard Mobile Authenticator
  - Generate Steam Guard 2FA codes
  - AES 256-bit encryption of Steam Account `maFiles` directory
+	- Password strength meter
  - Multiple language support
  - Auto-updater
  - Cross-platform (Windows, MacOS, Linux)
