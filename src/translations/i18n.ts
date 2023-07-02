@@ -81,7 +81,12 @@ i18n
 					"noEncryptWarning": "You chose not to encrypt your files. Doing so imposes a security risk for yourself. If an attacker were to gain access to your computer, they could completely lock you out of your account and steal all of your items.",
 					"Accept": "Accept",
 					// "Cancel": "Cancel",
-
+					"passwordStrengthWeakDesc": "Weak. Should contain at least 8 characters.",
+					"passwordStrengthFairDesc": "So-so. Should contain both uppercase and lowercase characters, and a number.",
+					"passwordStrengthGoodDesc": "Almost. Should be 10 characters long and contain special symbols for extra security.",
+					"passwordStrengthStrongDesc": "Awesome! You have a secure password.",
+					"passwordNotMatch": "Passwords do not match",
+					
 					// components/AccountsList.tsx
 					"Account": "Account",
 					"View Confirmations": "View Confirmations",

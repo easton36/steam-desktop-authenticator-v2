@@ -1,18 +1,53 @@
 import { Dialog, Transition } from '@headlessui/react';
-import { Fragment, useEffect, useRef, useState } from 'react';
+import { Fragment, useEffect, useMemo, useState } from 'react';
 import { connect } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+import { passwordStrength } from '../../utils/passwordStrength.util';
 
 const SetupEncryptionModal = ({ isOpen, setIsOpen, triggerNotice }: { isOpen: boolean, setIsOpen: (value: boolean) => void, triggerNotice: (notice: { title: string, message: string }) => void }) => {
 	const { t } = useTranslation();
 	
 	const [password, setPassword] = useState("");
+	const [confirmPassword, setConfirmPassword] = useState("");
 
 	const closeModal = () => {
 		setIsOpen(false);
 		setPassword("");
 		triggerNotice({ title: t('WARNING'), message: t('noEncryptWarning') })
 	};
+
+	const passwordStrengthValue = useMemo(() => {
+		const strength = passwordStrength(password);
+
+		switch(strength?.id){
+			case 0:
+				return {
+					color: 'bg-red-500',
+					width: 'w-1/4',
+					text: t('passwordStrengthWeakDesc')
+				};
+			case 1:
+				return {
+					color: 'bg-yellow-500',
+					width: 'w-1/2',
+					text: t('passwordStrengthFairDesc')
+				};
+			case 2:
+				return {
+					color: 'bg-blue-500',
+					width: 'w-3/4',
+					text: t('passwordStrengthGoodDesc')
+				};
+			case 3:
+				return {
+					color: 'bg-green-500',
+					width: 'w-full',
+					text: t('passwordStrengthStrongDesc')
+				};
+			default:
+				return "";
+		}
+	}, [password]);
 
 	return (
 		<Transition appear show={isOpen} as={Fragment}>
@@ -33,7 +68,29 @@ const SetupEncryptionModal = ({ isOpen, setIsOpen, triggerNotice }: { isOpen: bo
 									{t('Setup Encryption')}
 								</Dialog.Title>
 								<div className="mt-2 flex flex-col gap-2">
-									<input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.currentTarget.value)} className="w-full border border-gray-300 rounded-md px-3 py-2 text-xs text-gray-900 focus:outline-none focus:ring-1 focus:ring-violet-500 focus:border-violet-500" />
+									<div className="flex flex-col gap-2">
+										<input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.currentTarget.value)} className="w-full border border-gray-300 rounded-md px-3 py-2 text-xs text-gray-900 focus:outline-none focus:ring-1 focus:ring-violet-500 focus:border-violet-500" />
+										{password?.length > 0 && passwordStrengthValue && (
+											<div>
+												<div className={`${passwordStrengthValue?.width} h-2 rounded-md ${passwordStrengthValue?.color} transition-all duration-300`} />
+												<p className="text-xs text-gray-600">
+													{passwordStrengthValue?.text}
+												</p>
+											</div>
+										)}
+									</div>
+
+									<div className="flex flex-col gap-1">
+										<input type="password" placeholder="Confirm Password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.currentTarget.value)} className="w-full border border-gray-300 rounded-md px-3 py-2 text-xs text-gray-900 focus:outline-none focus:ring-1 focus:ring-violet-500 focus:border-violet-500" />
+										{password !== confirmPassword && confirmPassword?.length > 0 && (
+											<p className="text-xs text-red-500">
+												{t('passwordNotMatch')}
+											</p>
+										)}
+									</div>
+									
+
+									<hr />
 
 									<p className="text-xs text-gray-600">
 										{t('passwordDescription')}
