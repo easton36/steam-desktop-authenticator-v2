@@ -32,7 +32,7 @@ If you did not follow the directions and did not write your revocation code down
  - Original SDA maFiles are able to be imported into SDA v2, but will be converted to the new format
 	- This means that you will not be able to use the original SDA with the maFiles that were converted to the new format
 
-## Features
+## Features (IN PROGRESS)
  - Manage many Steam accounts at once
  - View and confirm all pending Steam trades and market listings
  - Add and remove Steam Guard Mobile Authenticator
