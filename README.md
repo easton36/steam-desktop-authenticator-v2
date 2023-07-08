@@ -3,6 +3,7 @@
 ### Needs custom steam authentication and trade management library built for vanilla javascript, unless someone wants to make it for the rust backend (no thanks)
 
 #### Project uses Tauri (so rust backend), and React with Redux, Tailwindcss, and headlessui on the frontend if you wanna take a crack at it!
+#### maFiles are going to turn into plain old json files with a similar format but less data saved. (refresh tokens instead of cookies now as well)
 
 <h1 align="center">
   <img  src="https://raw.githubusercontent.com/easton36/steam-desktop-authenticator-v2/master/src-tauri/icons/icon.png" height="64" width="64" />
