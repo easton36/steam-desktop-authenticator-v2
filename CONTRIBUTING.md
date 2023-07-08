@@ -5,7 +5,7 @@ Thank you for your interest in contributing to SDA v2! We welcome contributions 
 ## Table of Contents
 1. Project Overview
 2. Development Setup
-  - Prerequisites
+	  - Prerequisites
   - Getting Started
 3. Contributing to i18n Translations
   - Understanding the Localization Process
