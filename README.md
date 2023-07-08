@@ -56,4 +56,3 @@ This project is licensed under the [MIT License](https://github.com/easton36/ste
 
 ## Credits
  - [Jessecar96](https://github.com/Jessecar96) for creating the original [SteamDesktopAuthenticator](https://github.com/Jessecar96/SteamDesktopAuthenticator)
- - [DoctorMckay](https://github.com/DoctorMcKay) for creating all of the Steam libraries used in this project
