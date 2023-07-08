@@ -1,3 +1,7 @@
+# NOTICE:
+### This is not finished yet, I am just open sourcing now because I don't have ton of time to finish it ATM!
+### Needs custom steam authentication and trade management library built for vanilla javascript, unless someone wants to make it for the rust backend (no thanks)
+
 <h1 align="center">
   <img  src="https://raw.githubusercontent.com/easton36/steam-desktop-authenticator-v2/master/src-tauri/icons/icon.png" height="64" width="64" />
   <br/>
