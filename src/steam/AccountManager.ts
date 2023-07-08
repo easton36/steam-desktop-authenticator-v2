@@ -67,8 +67,15 @@ export const initializeSteamAccounts = async () => {
 /**
  * Initializes a single Steam account.
  */
-export const initializeSteamAccount = async (maFileData: any) => {
+export const initializeSteamAccount = async (username: string, password: string) => {
+	const account = Account({
+		username,
+		password
+	});
 
+	const loginSession = await account.createLoginSession();
+
+	return loginSession;
 };
 
 /**

@@ -206,7 +206,7 @@ const NoticeModal = ({ isOpen, setIsOpen, triggerNotice, accountManifests, encry
 								<div className="mt-4 flex flex-row items-center gap-2">
 									{!encrypted && (
 										<>
-											<input type="file" id="file" onChange={uploadFile} ref={fileInputRef} style={{ display: 'none '}} accept={isEncrypted ? '.maFile,.json' : '.maFile'} multiple={isEncrypted}/>
+											<input type="file" id="file" onChange={uploadFile} ref={fileInputRef} style={{ display: 'none '}} accept={'.maFile,.json'} multiple={isEncrypted}/>
 											<button type="button" className={`inline-flex justify-center rounded-md border border-transparent bg-violet-500 px-4 py-2 text-14 font-medium text-white hover:bg-violet-400
 											 	duration-100 focus:outline-none focus-visible:ring-1 focus-visible:ring-violet-500 focus-visible:ring-offset-1
 												${isEncrypted && !passkey ? 'opacity-50 cursor-not-allowed' : 'opacity-100 cursor-pointer'}`}

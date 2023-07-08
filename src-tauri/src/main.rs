@@ -7,12 +7,6 @@ use std::io::ErrorKind;
 use dirs::config_local_dir;
 use rfd;
 
-// Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
-#[tauri::command]
-fn greet(name: &str) -> String {
-    format!("Hello, {}! You've been greeted from Rust!", name)
-}
-
 static LOCK_FILE: &str = "steam-desktop-authenticator-v2.lock";
 
 fn main() {
@@ -93,7 +87,6 @@ fn main() {
 			}
 			_ => {}
 		})
-        .invoke_handler(tauri::generate_handler![greet])
         .build(tauri::generate_context!())
         .expect("error while running tauri application")
 		.run(|_app_handle, event| match event {

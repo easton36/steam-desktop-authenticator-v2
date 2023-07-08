@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { invoke } from "@tauri-apps/api/tauri";
 import { connect } from "react-redux";
 import { useTranslation } from "react-i18next";
 
@@ -24,8 +23,7 @@ const App = ({ setupNewAccount, setupEncryption }: {
 	setupEncryption: () => void
 }) => {
 	const { t } = useTranslation();
-
-	const [greetMsg, setGreetMsg] = useState("");
+	
 	// useEffect(() => {
 	// 	document.addEventListener('contextmenu', event => event.preventDefault());
 	// }, []);
