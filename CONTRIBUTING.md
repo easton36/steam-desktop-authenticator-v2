@@ -74,8 +74,8 @@ To add or modify translations:
 For example:
 ```
 {
-	"Setup New Account": "Setup New Account",
-	"Setup Encryption": "Setup Encryption"
+	"Some English Key": "Etwas englischer Schlüssel",
+	"anotherEnglishKey": "Ein weiterer englischer Schlüssel"
 }
 ```
 4. Save the changes to the JSON file.
